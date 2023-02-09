@@ -1,0 +1,10 @@
+library(reshape)
+data("airquality")
+airquality_melted <- melt(airquality, id.vars = c("Month", "Day"))
+head(airquality_melted)
+airquality_melted2 <- melt(airquality, id.vars = c("Month", "Day"), value.name = "value", variable.name = "variable")
+head(airquality_melted2)
+airquality_cast <- dcast(airquality_melted2, Month + Day ~ variable, value.var = "value")
+head(airquality_cast)
+airquality_avg <- dcast(airquality_melted2, Month ~ variable, value.var = "value", fun.aggregate = mean)
+airquality_avg[,c("Ozone", "Solar.R", "Wind", "Temp")]
