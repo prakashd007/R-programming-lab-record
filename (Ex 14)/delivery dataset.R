@@ -1,0 +1,6 @@
+dataset<-read.csv("delivery.csv")
+View(data)
+model <- lm(delTime ~ n.prod + distance, data=dataset)
+summary(model)
+new_data <- data.frame(n.prod = 9, distance = 450)
+predict(model, newdata=new_data)
